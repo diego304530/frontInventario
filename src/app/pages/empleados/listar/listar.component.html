@@ -1,0 +1,40 @@
+<div class="col-lg-12">
+  <nb-card>
+    <nb-card-header>
+      ADMINISTRACIÓN EMPLEADOS
+      <button type="button" class="btn btn-success" (click)="agregar()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </nb-card-header>
+    <table class="table">
+      <tr>
+        <th *ngFor="let columaActual of nombresColumnas">{{ columaActual }}</th>
+      </tr>
+      <ng-container *ngFor="let empleadoActual of empleados">
+        <tr>
+          <td>{{ empleadoActual.name }}</td>
+          <td>{{ empleadoActual.lastName }}</td>
+          <td>{{ empleadoActual.address }}</td>
+          <td>{{ empleadoActual.email }}</td>
+          <td>{{ birthdayDate.email }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="editar(empleadoActual._id)"
+            >
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="eliminar(empleadoActual._id)"
+            >
+              <i class="fas fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </nb-card>
+</div>

@@ -1,0 +1,59 @@
+<div class="col-lg-12">
+    <nb-card>
+        <!-- Se muestra el encabezado si se está en modo creación -->
+        <nb-card-header *ngIf="modoCreacion">
+            CREAR ESTUDIANTE
+        </nb-card-header>
+        <!-- Se muestra el encabezado si se está en modo edición -->
+        <nb-card-header *ngIf="!modoCreacion">
+            ACTUALIZAR ESTUDIANTE
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <div class="col-3">
+                    <label>Cedula</label>
+                </div>
+                <div class="col-9">
+                    <!-- Se deshabilita si no está en modo creación -->
+                    <input class="form-control" type="text" [disabled]="!modoCreacion" [(ngModel)]="elEstudiante.cedula">
+                    <!-- Vinculación bidireccional del valor del campo con la propiedad "cedula" del objeto "elEstudiante" -->
+                    <!-- Muestra un mensaje de error si se ha intentado enviar el formulario y el campo "Cedula" está vacío -->
+                    <p *ngIf="intentoEnvio && elEstudiante.cedula=='' ">Requerido</p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-3">
+                    <label>Nombre</label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" type="text" [(ngModel)]="elEstudiante.nombre">
+                    <!-- Vinculación bidireccional del valor del campo con la propiedad "nombre" del objeto "elEstudiante" -->
+                    <!-- Muestra un mensaje de error si se ha intentado enviar el formulario y el campo "Nombre" está vacío -->
+                    <p *ngIf="intentoEnvio && elEstudiante.nombre=='' ">Requerido</p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-3">
+                    <label>Apellido</label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" type="text" [(ngModel)]="elEstudiante.apellido">
+                    <p *ngIf="intentoEnvio && elEstudiante.apellido=='' ">Requerido</p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <!-- Botón "Crear" visible si se está en modo creación -->
+                <button *ngIf="modoCreacion" class="btn btn-primary btn-block" (click)="agregar()">
+                        Crear
+                    </button>
+                <!-- Botón "Actualizar" visible si se está en modo edición -->
+                <button *ngIf="!modoCreacion" class="btn btn-primary btn-block" (click)="editar()">
+                        Actualizar
+                    </button>
+            </div>
+        </nb-card-body>
+    </nb-card>
+</div>

@@ -1,0 +1,130 @@
+<div class="col-lg-12">
+  <nb-card>
+    <!-- Se muestra el encabezado si se está en modo creación -->
+    <nb-card-header *ngIf="modoCreacion"> CREAR INVENTARIO </nb-card-header>
+    <!-- Se muestra el encabezado si se está en modo edición -->
+    <nb-card-header *ngIf="!modoCreacion">
+      ACTUALIZAR INVENTARIO
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-3">
+          <label>Fecha</label>
+        </div>
+        <div class="col-9">
+          <input
+            class="form-control"
+            type="date"
+            [(ngModel)]="elInventario.date"
+          />
+          <!-- Vinculación bidireccional del valor del campo con la propiedad "nombre" del objeto "elEstudiante" -->
+          <!-- Muestra un mensaje de error si se ha intentado enviar el formulario y el campo "Nombre" está vacío -->
+          <p *ngIf="intentoEnvio && elInventario.date == ''">Requerido</p>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-3">
+          <label>Cantidad</label>
+        </div>
+        <div class="col-9">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="elInventario.quantity"
+          />
+          <p *ngIf="intentoEnvio && elInventario.quantity == ''">Requerido</p>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-3">
+          <label>Cantidad en stock </label>
+        </div>
+        <div class="col-9">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="elInventario.quantityInStock"
+          />
+          <p *ngIf="intentoEnvio && elInventario.quantityInStock == ''">
+            Requerido
+          </p>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-3">
+          <label>Observacion</label>
+        </div>
+        <div class="col-9">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="elInventario.observation"
+          />
+          <p *ngIf="intentoEnvio && elInventario.observation == ''">
+            Requerido
+          </p>
+        </div>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col-3">
+          <label>Producto</label>
+        </div>
+        <div class="col-9">
+          <select class="form-control" [(ngModel)]="elInventario.product._id">
+            <option
+              *ngFor="let producto of productosList"
+              [value]="producto._id"
+            >
+              {{ producto.name }}
+            </option>
+          </select>
+          <p *ngIf="intentoEnvio && !elInventario.product._id">Requerido</p>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col-3">
+          <label>Empleado</label>
+        </div>
+        <div class="col-9">
+          <select class="form-control" [(ngModel)]="elInventario.employee._id">
+            <option
+              *ngFor="let empleado of empleadoList"
+              [value]="empleado._id"
+            >
+              {{ empleado.name }}
+            </option>
+          </select>
+          <p *ngIf="intentoEnvio && !elInventario.employee._id">Requerido</p>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <!-- Botón "Crear" visible si se está en modo creación -->
+        <button
+          *ngIf="modoCreacion"
+          class="btn btn-primary btn-block"
+          (click)="agregar()"
+        >
+          Crear
+        </button>
+        <!-- Botón "Actualizar" visible si se está en modo edición -->
+        <button
+          *ngIf="!modoCreacion"
+          class="btn btn-primary btn-block"
+          (click)="editar()"
+        >
+          Actualizar
+        </button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>
